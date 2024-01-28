@@ -14,7 +14,7 @@ function App() {
     const response = await axios.get(`https://react-mini-projects-api.classbon.com/FastFood/list/${categoryId ? "?categoryId="+categoryId : ""}`)
     console.log(response.data)
     setLoading(false)
-    setFastFoodItems(response.Data)
+    setFastFoodItems(response.data)
   }
   useEffect(()=> {
     fetchData()
