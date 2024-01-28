@@ -3,7 +3,7 @@ import axios from '../axios'
 import Loading from "../Loading/loading"
 
 
-const CategoryList = () => {
+const CategoryList = ({ filterItems, children }) => {
     const [categories, setCategories] = useState([])
     const [loading, setLoading] = useState(true)
     useEffect(() => {
@@ -21,21 +21,28 @@ const CategoryList = () => {
             return <Loading />
         }
         return (
-            <ul className="nav ">
-                <li className="nav-item">
-                    <a className="nav-link" href="">همه فست فودها</a>
-                </li>
-                {/* {JSON.stringify(categories)} */}
-                {categories?.map((category) => (
-                    <li className="nav-item">
-                        <a className="nav-link" href="">
-                            {/* سلام */}
-                            {category.name}
-                        </a>
-                    </li>)
-                )}
+            <div className="ps-3 w-100 d-flex align-items-center justtify-content-between gap-5">
+                <ul className="nav ">
+                    <li className="nav-item" onClick={() => filterItems()}>
+                        <a className="nav-link" href="">همه فست فودها</a>
+                    </li>
+                    {/* {JSON.stringify(categories)} */}
+                    {categories?.map((category) => (
+                        <li className="nav-item"
+                            key={category.id}
+                            onClick={() => filterItems(category.id)}>
+                            <a className="nav-link" href="">
+                                {/* سلام */}
+                                {category.name}
+                            </a>
+                        </li>)
+                    )}
 
-            </ul>
+                </ul>
+                {children}
+                {/* <SearchBar className="" /> */}
+            </div>
+
         )
     }
 
